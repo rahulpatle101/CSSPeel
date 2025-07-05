@@ -1,0 +1,16 @@
+{
+  "manifest_version": 3,
+  "name": "Atomic CSS Extractor",
+  "description": "Extracts styles from a webpage and shows organized styleguide.",
+  "version": "1.0",
+  "action": {
+    "default_popup": "popup.html"
+    },
+    "permissions": ["activeTab", "scripting", "storage"],
+    "web_accessible_resources": [
+    {
+        "resources": ["viewer.html"],
+        "matches": ["<all_urls>"]
+    }
+    ]
+}

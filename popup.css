@@ -1,0 +1,77 @@
+body {
+  font-family: sans-serif;
+  width: 400px;
+  padding: 10px;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  background: #eee;
+  border-radius: 4px;
+}
+
+.tab-btn.active {
+  background: #3273dc;
+  color: white;
+}
+
+.tab-panel {
+  display: none;
+}
+
+.tab-panel.active {
+  display: block;
+}
+
+.token {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  font-size: 14px;
+}
+
+.token .preview {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
+.token .value {
+  flex-grow: 1;
+}
+
+.token .copy {
+  cursor: pointer;
+  font-size: 12px;
+  background: #ddd;
+  padding: 2px 6px;
+  border-radius: 4px;
+  margin-left: 8px;
+}
+
+.actions {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+}
