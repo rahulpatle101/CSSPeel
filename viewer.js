@@ -1,12 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("📥 viewer.js loaded");
-
   chrome.storage.local.get("designTokens", (res) => {
     let tokens = res.designTokens;
 
     // Fallback dummy data if none found
     if (!tokens) {
-      console.warn("⚠️ No tokens found. Injecting dummy data.");
       tokens = {
         colors: ["#3273dc", "#ff0066", "#111111"],
         fontFamilies: ["'Inter', sans-serif", "Arial, sans-serif"],
@@ -16,9 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
         shadows: ["0 2px 4px rgba(0,0,0,0.1)", "0 0 8px rgba(255,0,0,0.2)"]
       };
 
-      chrome.storage.local.set({ designTokens: tokens }, () => {
-        console.log("✅ Dummy tokens injected into chrome.storage.local");
-      });
+      chrome.storage.local.set({ designTokens: tokens }, () => {});
     }
 
     renderTokens(tokens);
@@ -116,8 +111,6 @@ function renderTokens(tokens) {
       panel.appendChild(createTokenRow(shadow, null, shadow, { boxShadow: shadow }));
     });
   });
-
-  console.log("✅ Finished rendering tokens in viewer");
 }
 
 function setupDownloadButtons(tokens) {

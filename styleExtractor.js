@@ -32,9 +32,7 @@ function extractAndGroupStyles(rules) {
   }
 
   // Store in chrome.storage
-  chrome.storage.local.set({ extractedStyles: categories }, () => {
-    console.log("✅ Styles saved to chrome.storage.local", categories);
-  });
+  chrome.storage.local.set({ extractedStyles: categories }, () => {});
 
   return categories;
 }
@@ -46,13 +44,11 @@ function extractAndGroupStyles(rules) {
         try {
           return sheet.cssRules;
         } catch (e) {
-          console.warn("Skipped stylesheet due to CORS:", sheet.href);
           return false;
         }
       })
       .flatMap(sheet => Array.from(sheet.cssRules));
 
-    console.log("Extracted CSS rules:", rules.length);
     const grouped = extractAndGroupStyles(rules);
 
     // Download .css
@@ -73,6 +69,5 @@ function extractAndGroupStyles(rules) {
     a.click();
     a.remove();
   } catch (err) {
-    console.error("Error extracting styles:", err);
   }
 })();

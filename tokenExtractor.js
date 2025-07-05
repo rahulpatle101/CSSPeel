@@ -56,10 +56,9 @@ function extractColorTokens(elements) {
       if (val && !val.includes('rgba(0, 0, 0, 0)') && val !== 'transparent') {
         try {
           const hex = toHex(val);
-          console.log(`🎨 Found ${prop} on <${el.tagName.toLowerCase()}>: ${val} → ${hex}`);
           colorSet.add(hex);
         } catch (e) {
-          console.warn("❌ Color parse error:", val);
+          // Ignore color parse errors
         }
       }
     });
@@ -74,7 +73,6 @@ function extractColorTokens(elements) {
           if (val && val !== 'transparent') {
             try {
               const hex = toHex(val);
-              console.log(`🔍 CLASS MATCH: .${cls} on <${el.tagName.toLowerCase()}> → ${prop}: ${val} → ${hex}`);
               colorSet.add(hex);
             } catch {}
           }
@@ -93,13 +91,6 @@ function extractTokens() {
   const elements = Array.from(document.body.querySelectorAll('*')).filter(el => {
     const tag = el.tagName.toLowerCase();
     return !['script', 'style', 'meta', 'link', 'svg', 'path', 'noscript'].includes(tag);
-  });
-
-  console.log("🔍 Total elements scanned:", elements.length);
-  elements.slice(0, 20).forEach(el => {
-    if (el.className) {
-      console.log("📌", el.tagName, "→", el.className);
-    }
   });
 
   const styleMap = {
@@ -135,7 +126,6 @@ function extractTokens() {
 
   // 🔁 Use improved color extraction
   styleMap.colors = extractColorTokens(elements);
-  console.log("🎨 Raw colors before filtering:", styleMap.colors);
 
   // === Frequency filtering ===
   const filterByFrequency = (arr) => {
@@ -160,9 +150,8 @@ function extractTokens() {
     shadows: [...new Set(filterByFrequency(styleMap.shadows))]
   };
 
-  console.log("🎯 Final Token Object:", tokens);
   chrome.storage.local.set({ designTokens: tokens }, () => {
-    console.log('✅ Tokens saved to chrome.storage.local');
+    // Tokens saved to chrome.storage.local
   });
 
   return tokens;
